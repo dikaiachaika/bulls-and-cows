@@ -17,14 +17,13 @@
 </div>
 
 <% if @game.status == 'active' %>
-  <div class="attempt-form" data-controller="game">
+  <div class="attempt-form">
     <h3>Введите ваш вариант:</h3>
     
     <%= form_with(url: attempt_game_path(@game), local: true) do |form| %>
       <div class="form-group">
-        <%= form.label :guess, "4 цифры" %>
+       
         <%= form.text_field :guess, 
-            data: { game_target: "input" },
             maxlength: 4, 
             size: 4,
             placeholder: "1234",
@@ -32,7 +31,7 @@
             autocomplete: 'off',
             inputmode: 'numeric',
             pattern: '\d*' %>
-        <small style="display: block; color: #666; margin-top: 5px;">Введите 4 цифры (например: 1234)</small>
+        <small style="display: block; color: #666; margin-top: 5px;">Введите 4 разные цифры (например: 1234)</small>
       </div>
       
       <div class="form-group">

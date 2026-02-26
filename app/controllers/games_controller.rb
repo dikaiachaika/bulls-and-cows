@@ -15,25 +15,27 @@ class GamesController < ApplicationController
   end
   
   def attempt
-    guess = params[:guess].to_s.strip
+  guess = params[:guess].to_s.strip
+  
+  if guess.blank?
+    flash[:alert] = "Пожалуйста, введите число"
+  elsif !guess.match?(/\A\d{4}\z/)
+    flash[:alert] = "Пожалуйста, введите ровно 4 цифры (без пробелов и букв)"
+  elsif guess.chars.uniq.length != 4
+    flash[:alert] = "Цифры не должны повторяться! Введите 4 разные цифры"
+  else
+    @game.check_guess(guess)
     
-    if guess.blank?
-      flash[:alert] = "Пожалуйста, введите число"
-    elsif guess.match?(/\A\d{4}\z/)
-      @game.check_guess(guess)
-      
-      if @game.status == 'won'
-        flash[:notice] = "Поздравляем! Вы угадали число #{@game.secret_number}!"
-      elsif @game.max_attempts_reached?
-        @game.update(status: 'lost')
-        flash[:alert] = "Игра окончена! Вы использовали все попытки. Загаданное число: #{@game.secret_number}"
-      end
-    else
-      flash[:alert] = "Пожалуйста, введите ровно 4 цифры (без пробелов и букв)"
+    if @game.status == 'won'
+      flash[:notice] = "Поздравляем! Вы угадали число #{@game.secret_number}!"
+    elsif @game.max_attempts_reached?
+      @game.update(status: 'lost')
+      flash[:alert] = "Игра окончена! Вы использовали все попытки. Загаданное число: #{@game.secret_number}"
     end
-    
-    redirect_to @game
   end
+  
+  redirect_to @game
+end
   
   def destroy
     @game.destroy
