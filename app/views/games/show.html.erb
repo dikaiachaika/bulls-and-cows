@@ -1,16 +1,16 @@
-<h1>Игра #<%= @game.id %></h1>
+<h1>Игра #<%= game_display_number(@game) %></h1>
 
 <div class="game-info">
   <p>Попыток: <%= @game.attempts.count %> / 10</p>
   
   <% if @game.status == 'active' %>
-    <p>Статус: Активна</p>
+    <p>Статус: <span style="color: #28a745;">Активна</span></p>
   <% elsif @game.status == 'won' %>
-    <div class="game-status won">
+    <div style="background-color: #d4edda; padding: 15px; border-radius: 5px; color: #155724;">
       <p>Победа! Вы угадали число!</p>
     </div>
   <% else %>
-    <div class="game-status lost">
+    <div style="background-color: #f8d7da; padding: 15px; border-radius: 5px; color: #721c24;">
       <p>Игра окончена. Загаданное число: <strong><%= @game.secret_number %></strong></p>
     </div>
   <% end %>
