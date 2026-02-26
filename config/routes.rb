@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :games do
+  resources :games, except: [:new] do
     member do
       post 'attempt'
     end

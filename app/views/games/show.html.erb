@@ -69,7 +69,10 @@
   <p>Пока нет попыток</p>
 <% end %>
 
-<div style="margin-top: 20px;">
-  <%= link_to "Новая игра", new_game_path, class: "btn btn-new" %>
-  <%= link_to "К списку игр", games_path, class: "btn" %>
+<div class="button-group">
+  <%= button_to "Новая игра", games_path, method: :post, class: "btn-new-game" %>
+  <%= link_to "К списку игр", games_path, class: "btn-list" %>
+  <%= button_to "Удалить игру", game_path(@game), method: :delete, 
+      data: { confirm: "Вы уверены, что хотите удалить эту игру?" },
+      class: "btn-delete" %>
 </div>

@@ -1,9 +1,0 @@
-<h1>Новая игра</h1>
-
-<%= form_with(model: @game, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.submit "Начать игру", class: "btn" %>
-  </div>
-<% end %>
-
-<%= link_to "Назад", games_path, class: "btn" %>
