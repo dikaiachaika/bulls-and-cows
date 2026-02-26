@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :attempt, :destroy]
   
   def index
-    @games = Game.order(created_at: :desc).limit(20)  # Исправлено: :desc вместо .desc
+    @games = Game.order(created_at: :desc).limit(20)  
   end
   
   def create

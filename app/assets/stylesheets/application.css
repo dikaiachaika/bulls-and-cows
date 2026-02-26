@@ -1,7 +1,3 @@
-/*
- * Это глобальный файл стилей
- */
-
 body {
   font-family: Arial, sans-serif;
   max-width: 800px;
@@ -133,9 +129,29 @@ tr:hover {
 }
 
 .flash {
+  animation: slideIn 0.3s ease, fadeOut 0.5s ease 3s forwards;
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 4px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+    display: none;
+  }
 }
 
 .flash.notice {
@@ -149,6 +165,7 @@ tr:hover {
   border: 1px solid #f5c6cb;
   color: #721c24;
 }
+
 
 small {
   font-size: 12px;
@@ -213,3 +230,4 @@ input[type="text"]:focus:invalid {
 .btn-delete:hover {
   background-color: #c82333;
 }
+
