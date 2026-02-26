@@ -1,0 +1,45 @@
+<h1>Быки и коровы</h1>
+
+<div class="game-info">
+  <p>Правила игры:</p>
+  <ul>
+    <li>Компьютер загадывает 4-значное число</li>
+    <li>Вы вводите свой вариант</li>
+    <li>Быки - цифра на своем месте</li>
+    <li>Коровы - цифра есть, но не на своем месте</li>
+    <li>У вас есть 10 попыток</li>
+  </ul>
+</div>
+
+<%= link_to "Новая игра", new_game_path, class: "btn btn-new" %>
+
+<h2>Последние игры</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Статус</th>
+      <th>Попыток</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= game.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+        <td>
+          <% if game.status == 'active' %>
+            Активна
+          <% elsif game.status == 'won' %>
+            Победа
+          <% else %>
+            Поражение
+          <% end %>
+        </td>
+        <td><%= game.attempts.count %></td>
+        <td><%= link_to "Продолжить", game %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
