@@ -1,10 +1,13 @@
 class Game < ApplicationRecord
   has_many :attempts, dependent: :destroy
   
-  validates :secret_number, presence: true, length: { is: 4 }
+  validates :secret_number, presence: true, length: { is: :digit_length }
+  validates :digit_length, presence: true, inclusion: { in: [3, 4, 5, 6] }
   validates :status, inclusion: { in: ['active', 'won', 'lost'] }
   
   before_validation :generate_secret_number, on: :create
+  
+  attr_accessor :game_time 
   
   def check_guess(guess)
     bulls = 0
@@ -20,8 +23,8 @@ class Game < ApplicationRecord
     
     attempts.create(guess: guess, bulls: bulls, cows: cows)
     
-    if bulls == 4
-      update(status: 'won')
+    if bulls == digit_length
+      update(status: 'won', completed_at: Time.current)
     end
     
     bulls
@@ -31,10 +34,30 @@ class Game < ApplicationRecord
     attempts.count >= 10
   end
   
+  def time_spent
+    return 0 unless started_at
+    end_time = completed_at || Time.current
+    (end_time - started_at).to_i
+  end
+  
+  def formatted_time
+    total_seconds = time_spent
+    minutes = total_seconds / 60
+    seconds = total_seconds % 60
+    format("%02d:%02d", minutes, seconds)
+  end
+
+  def safe_digit_length
+    digit_length || 4
+  end
+  
   private
   
   def generate_secret_number
-    self.secret_number ||= (0..9).to_a.sample(4).join
+    self.digit_length ||= 4
+    self.secret_number ||= (0..9).to_a.sample(digit_length).join
     self.status ||= 'active'
+    self.started_at ||= Time.current
   end
+
 end

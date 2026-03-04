@@ -3,16 +3,27 @@
 <div class="game-info">
   <p><strong>Правила игры:</strong></p>
   <ul style="padding-left: 20px; margin: 10px 0;">
-    <li>Компьютер загадывает 4-значное число</li>
+    <li>Компьютер загадывает число с неповторяющимися цифрами</li>
     <li>Вы вводите свой вариант</li>
     <li>Быки - цифра на своем месте</li>
     <li>Коровы - цифра есть, но не на своем месте</li>
     <li>У вас есть 10 попыток</li>
+    <li>Ведется учет времени игры</li>
   </ul>
 </div>
 
-<div class="button-group" style="justify-content: center;">
-  <%= button_to "Новая игра", games_path, method: :post, class: "btn btn-new", style: "min-width: 200px;" %>
+<div class="form-group" style="text-align: center; margin-bottom: 20px;">
+  <label for="digit_length">Выберите длину числа:</label>
+  <%= form_with(url: games_path, method: :post, local: true, style: "display: inline-block;") do |form| %>
+    <div style="display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;">
+      <%= form.select :digit_length, 
+          options_for_select([['3 цифры', 3], ['4 цифры', 4], ['5 цифр', 5], ['6 цифр', 6]], 4), 
+          {}, 
+          class: "form-select", 
+          style: "padding: 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 16px;" %>
+      <%= form.submit "Новая игра", class: "btn btn-new", style: "min-width: 150px;" %>
+    </div>
+  <% end %>
 </div>
 
 <% if @games.any? %>
@@ -24,7 +35,9 @@
         <tr>
           <th>Дата</th>
           <th>Статус</th>
+          <th>Длина</th>
           <th>Попыток</th>
+          <th>Время</th>
           <th>Действия</th>
         </tr>
       </thead>
@@ -41,7 +54,9 @@
                 <span style="color: #dc3545;">Поражение</span>
               <% end %>
             </td>
-            <td><%= game.attempts.count %></td>
+            <td><%= game.digit_length %></td>
+            <td><%= game.attempts.count %>/10</td>
+            <td><%= game.formatted_time %></td>
             <td>
               <div style="display: flex; gap: 5px; flex-wrap: wrap;">
                 <%= link_to "Играть", game, style: "padding: 6px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; font-size: 0.9rem;" %>

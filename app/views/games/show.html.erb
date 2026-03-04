@@ -1,17 +1,22 @@
 <h1>Игра #<%= game_display_number(@game) %></h1>
 
 <div class="game-info">
-  <p><strong>Попыток:</strong> <%= @game.attempts.count %> / 10</p>
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <p><strong>Попыток:</strong> <%= @game.attempts.count %> / 10</p>
+    <p><strong>Длина числа:</strong> <%= @game.digit_length %> цифры</p>
+    <p><strong>Время:</strong> <span id="timer"><%= @game.formatted_time %></span></p>
+  </div>
   
   <% if @game.status == 'active' %>
     <p><strong>Статус:</strong> <span style="color: #28a745;">Активна</span></p>
   <% elsif @game.status == 'won' %>
     <div class="game-status won">
-      <p>Победа! Вы угадали число!</p>
+      <p>Победа! Вы угадали число за <%= @game.formatted_time %>!</p>
     </div>
   <% else %>
     <div class="game-status lost">
       <p>Игра окончена. Загаданное число: <strong><%= @game.secret_number %></strong></p>
+      <p>Время игры: <%= @game.formatted_time %></p>
     </div>
   <% end %>
 </div>
@@ -20,17 +25,18 @@
   <div class="attempt-form">
     <h3>Введите ваш вариант:</h3>
     
-    <%= form_with(url: attempt_game_path(@game), local: true) do |form| %>
+    <%= form_with(url: attempt_game_path(@game), local: true, html: { id: 'guess-form' }) do |form| %>
       <div class="form-group">
-        <%= form.label :guess, "4 цифры (без повторений)" %>
+        <%= form.label :guess, "#{@game.digit_length} цифры (без повторений)" %>
         <%= form.text_field :guess, 
-            maxlength: 4, 
-            placeholder: "1234",
-            style: "width: 100%; max-width: 200px; text-align: center; font-size: 18px; padding: 12px;",
-            autocomplete: 'off',
-            inputmode: 'numeric',
-            pattern: '\d*' %>
-        <small>Введите 4 разные цифры (например: 1234)</small>
+        maxlength: @game.safe_digit_length, 
+        placeholder: "0" * @game.safe_digit_length,
+        style: "width: 100%; max-width: 200px; text-align: center; font-size: 18px; padding: 12px;",
+        autocomplete: 'off',
+        inputmode: 'numeric',
+        pattern: '\d*',
+        data: { action: "input->game#validateInput" } %>
+      <small>Введите <%= @game.safe_digit_length %> разные цифры (например: <%= (0..9).to_a.sample(@game.safe_digit_length).join %>)</small>
       </div>
       
       <div class="form-group">
@@ -69,7 +75,7 @@
   <p style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">Пока нет попыток</p>
 <% end %>
 
-<div class="button-group" style="justify-content: center;">
+<div class="button-group" style="justify-content: center; flex-wrap: wrap;">
   <%= button_to "Новая игра", games_path, method: :post, class: "btn btn-new" %>
   <%= link_to "К списку игр", games_path, class: "btn", 
     style: "padding: 8px 24px; font-size: 16px; min-width: 100px; text-align: center; line-height: 1.5; font-weight: 450; font-family: inherit;" %>
@@ -77,3 +83,34 @@
       data: { confirm: "Удалить эту игру?" },
       class: "btn btn-danger" %>
 </div>
+
+<% if @game.status == 'active' && @game.started_at.present? %>
+  <%= raw "
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const startTime = #{@game.started_at.to_i};
+      const timerElement = document.getElementById('timer');
+      
+      if (!timerElement) return;
+      
+      function updateTimer() {
+        const now = Math.floor(Date.now() / 1000);
+        const elapsed = now - startTime;
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+      
+      updateTimer();
+      const timerInterval = setInterval(updateTimer, 1000);
+      
+      const checkGameStatus = setInterval(function() {
+        if (document.querySelector('.game-status.won') || document.querySelector('.game-status.lost')) {
+          clearInterval(timerInterval);
+          clearInterval(checkGameStatus);
+        }
+      }, 1000);
+    });
+  </script>
+  " %>
+<% end %>
