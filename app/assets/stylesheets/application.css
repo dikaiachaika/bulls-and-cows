@@ -322,6 +322,21 @@ tr:last-child td {
     padding: 12px;
     font-size: 0.9rem;
   }
+
+  .game-info-grid {
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px 60px; 
+    padding: 15px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 100%;
+    justify-items: center;
+    overflow-x: auto; 
+  }
+
+  .game-info-grid .grid-item {
+    white-space: nowrap; 
+  }
   
   .attempt-form {
     padding: 15px;
