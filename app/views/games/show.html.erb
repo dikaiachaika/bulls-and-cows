@@ -1,24 +1,21 @@
 <h1>Игра #<%= game_display_number(@game) %></h1>
 
-<div class="game-info">
-  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-    <p><strong>Попыток:</strong> <%= @game.attempts.count %> / 10</p>
-    <p><strong>Длина числа:</strong> <%= @game.digit_length %> цифры</p>
-    <p><strong>Время:</strong> <span id="timer"><%= @game.formatted_time %></span></p>
+<div class="game-info-center">
+  <div class="game-info-grid">
+    <div class="grid-item"><strong>Статус:</strong> 
+      <% if @game.status == 'active' %>
+        <span style="color: #28a745;">Активна</span>
+      <% elsif @game.status == 'won' %>
+        <span style="color: #28a745;">Победа</span>
+      <% else %>
+        <span style="color: #dc3545;">Поражение</span>
+      <% end %>
+    </div>
+    
+    <div class="grid-item"><strong>Длина числа:</strong> <%= @game.digit_length %> цифры</div>
+    <div class="grid-item"><strong>Попыток:</strong> <%= @game.attempts.count %> / 10</div>
+    <div class="grid-item"><strong>Время:</strong> <span id="timer"><%= @game.formatted_time %></span></div>
   </div>
-  
-  <% if @game.status == 'active' %>
-    <p><strong>Статус:</strong> <span style="color: #28a745;">Активна</span></p>
-  <% elsif @game.status == 'won' %>
-    <div class="game-status won">
-      <p>Победа! Вы угадали число за <%= @game.formatted_time %>!</p>
-    </div>
-  <% else %>
-    <div class="game-status lost">
-      <p>Игра окончена. Загаданное число: <strong><%= @game.secret_number %></strong></p>
-      <p>Время игры: <%= @game.formatted_time %></p>
-    </div>
-  <% end %>
 </div>
 
 <% if @game.status == 'active' %>
@@ -28,14 +25,17 @@
     <%= form_with(url: attempt_game_path(@game), local: true, html: { id: 'guess-form' }) do |form| %>
       <div class="form-group">
         <%= form.label :guess, "#{@game.digit_length} цифры (без повторений)" %>
-        <%= form.text_field :guess, 
-        maxlength: @game.safe_digit_length, 
-        placeholder: "0" * @game.safe_digit_length,
+      <%= form.text_field :guess, 
+        maxlength: (@game.digit_length || 4), 
+        placeholder: "0" * (@game.digit_length || 4),
         style: "width: 100%; max-width: 200px; text-align: center; font-size: 18px; padding: 12px;",
         autocomplete: 'off',
         inputmode: 'numeric',
         pattern: '\d*',
-        data: { action: "input->game#validateInput" } %>
+        data: { 
+        controller: "game",
+        game_target: "input",
+        action: "input->game#validateInput" } %>
       <small>Введите <%= @game.safe_digit_length %> разные цифры (например: <%= (0..9).to_a.sample(@game.safe_digit_length).join %>)</small>
       </div>
       
@@ -114,3 +114,4 @@
   </script>
   " %>
 <% end %>
+

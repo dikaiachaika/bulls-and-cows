@@ -14,28 +14,35 @@ class GamesController < ApplicationController
     @attempt = Attempt.new
   end
   
-  def attempt
-    guess = params[:guess].to_s.strip
+def attempt
+  guess = params[:guess].to_s.strip
+  
+  puts "=" * 50
+  puts "ATTEMPT CONTROLLER:"
+  puts "Game ID: #{@game.id}"
+  puts "Guess from params: #{guess}"
+  puts "Game digit_length: #{@game.digit_length}"
+  puts "Game secret_number: #{@game.secret_number}"
+  
+  if guess.blank?
+    flash[:alert] = "Пожалуйста, введите число"
+  elsif !guess.match?(/\A\d{#{@game.digit_length}}\z/)
+    flash[:alert] = "Пожалуйста, введите ровно #{@game.digit_length} цифр"
+  elsif guess.chars.uniq.length != @game.digit_length
+    flash[:alert] = "Цифры не должны повторяться! Введите #{@game.digit_length} разные цифры"
+  else
+    @game.check_guess(guess)
     
-    if guess.blank?
-      flash[:alert] = "Пожалуйста, введите число"
-    elsif !guess.match?(/\A\d{#{@game.digit_length}}\z/)
-      flash[:alert] = "Пожалуйста, введите ровно #{@game.digit_length} цифры"
-    elsif guess.chars.uniq.length != @game.digit_length
-      flash[:alert] = "Цифры не должны повторяться! Введите #{@game.digit_length} разные цифры"
-    else
-      @game.check_guess(guess)
-      
-      if @game.status == 'won'
-        flash[:notice] = "Поздравляем! Вы угадали число #{@game.secret_number} за #{@game.formatted_time}!"
-      elsif @game.max_attempts_reached?
-        @game.update(status: 'lost', completed_at: Time.current)
-        flash[:alert] = "Игра окончена! Вы использовали все попытки. Загаданное число: #{@game.secret_number}"
-      end
+    if @game.status == 'won'
+      flash[:notice] = "Поздравляем! Вы угадали число #{@game.secret_number} за #{@game.formatted_time}!"
+    elsif @game.max_attempts_reached?
+      @game.update(status: 'lost', completed_at: Time.current)
+      flash[:alert] = "Игра окончена! Вы использовали все попытки. Загаданное число: #{@game.secret_number}"
     end
-    
-    redirect_to @game
   end
+  
+  redirect_to @game
+end
   
   def destroy
     @game.destroy

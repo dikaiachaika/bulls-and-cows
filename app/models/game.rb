@@ -9,26 +9,51 @@ class Game < ApplicationRecord
   
   attr_accessor :game_time 
   
-  def check_guess(guess)
-    bulls = 0
-    cows = 0
-    
-    guess.chars.each_with_index do |digit, index|
-      if digit == secret_number[index]
-        bulls += 1
-      elsif secret_number.include?(digit)
-        cows += 1
-      end
-    end
-    
-    attempts.create(guess: guess, bulls: bulls, cows: cows)
-    
-    if bulls == digit_length
-      update(status: 'won', completed_at: Time.current)
-    end
-    
-    bulls
+  def safe_digit_length
+    digit_length || 4
   end
+  
+def check_guess(guess)
+  bulls = 0
+  cows = 0
+  
+  # Логируем входящие данные
+  puts "=" * 50
+  puts "check_guess called:"
+  puts "guess: #{guess} (#{guess.class})"
+  puts "secret_number: #{secret_number} (#{secret_number.class})"
+  puts "digit_length: #{digit_length}"
+  puts "secret_number length: #{secret_number.length}"
+  
+  guess.to_s.chars.each_with_index do |digit, index|
+    puts "digit #{index}: #{digit} comparing with secret_number[#{index}]: #{secret_number[index]}"
+    
+    if digit == secret_number[index]
+      bulls += 1
+      puts "  -> BULL! bulls now: #{bulls}"
+    elsif secret_number.include?(digit)
+      cows += 1
+      puts "  -> COW! cows now: #{cows}"
+    else
+      puts "  -> nothing"
+    end
+  end
+  
+  attempt = attempts.create(guess: guess, bulls: bulls, cows: cows)
+  puts "Attempt created: #{attempt.valid? ? 'valid' : 'invalid'} #{attempt.errors.full_messages}"
+  puts "Bulls: #{bulls}, digit_length: #{digit_length}, bulls == digit_length? #{bulls == digit_length}"
+  
+  if bulls == digit_length
+    puts "VICTORY! Updating status to won"
+    update(status: 'won', completed_at: Time.current)
+  else
+    puts "No victory yet"
+  end
+  
+  puts "=" * 50
+  
+  bulls
+end
   
   def max_attempts_reached?
     attempts.count >= 10
@@ -46,10 +71,6 @@ class Game < ApplicationRecord
     seconds = total_seconds % 60
     format("%02d:%02d", minutes, seconds)
   end
-
-  def safe_digit_length
-    digit_length || 4
-  end
   
   private
   
@@ -59,5 +80,4 @@ class Game < ApplicationRecord
     self.status ||= 'active'
     self.started_at ||= Time.current
   end
-
 end

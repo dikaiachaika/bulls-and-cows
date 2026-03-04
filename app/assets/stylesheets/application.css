@@ -40,6 +40,7 @@ h3 {
   font-size: 1.2rem;
   margin: 0 0 15px;
   color: #555;
+  text-align: center; 
 }
 
 .game-info {
@@ -54,6 +55,37 @@ h3 {
   margin: 8px 0;
 }
 
+.game-info-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  width: 100%;
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.game-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 60px;
+  background-color: #e3f2fd;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-items: center; 
+}
+
+.game-info-grid .grid-item {
+  white-space: nowrap;
+  margin: 0;
+}
+
+
 .attempt-form {
   margin: 20px 0;
   padding: 20px;
@@ -63,6 +95,7 @@ h3 {
 
 .form-group {
   margin-bottom: 20px;
+  text-align: center; 
 }
 
 label {
@@ -317,15 +350,41 @@ tr:last-child td {
   }
   
   table {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    width: 100%;
+    border-collapse: collapse;
   }
   
   th, td {
-    padding: 8px 4px;
+    padding: 8px 2px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
   }
   
-  td:nth-child(3), td:nth-child(4) {
+  th:nth-child(3), td:nth-child(3),
+  th:nth-child(4), td:nth-child(4) {
     text-align: center;
+  }
+  
+  th:last-child, td:last-child {
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  td:last-child a,
+  td:last-child button {
+    display: inline-block !important;
+    padding: 6px 8px !important;
+    font-size: 0.8rem !important;
+    min-width: 50px !important;
+    text-align: center !important;
+    margin: 0 2px !important;
+    vertical-align: middle !important;
+  }
+  
+  td:last-child form {
+    display: inline-block !important;
+    margin: 0 !important;
   }
 
   .form-group {
@@ -334,6 +393,34 @@ tr:last-child td {
     display: flex;
     flex-direction: column;
     align-items: center; 
+  }
+
+  .form-group:first-of-type label {
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .form-group:first-of-type select,
+  .form-group:first-of-type input[type="submit"] {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 13px;
+    margin: 3px 0;
+    box-sizing: border-box;
+    height: 34px;
+  }
+  
+  .form-group:first-of-type select {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .form-group:first-of-type input[type="submit"] {
+    min-width: auto;
   }
 }
 

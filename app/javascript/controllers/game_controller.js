@@ -1,20 +1,22 @@
-// app/javascript/controllers/game_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["input"]
   
   connect() {
-    this.inputTarget.addEventListener('input', this.validateInput.bind(this))
+    if (this.hasInputTarget) {
+      this.inputTarget.addEventListener('input', this.validateInput.bind(this))
+    }
   }
   
   validateInput(event) {
-    // Разрешаем только цифры
-    this.inputTarget.value = this.inputTarget.value.replace(/[^0-9]/g, '')
+    const input = this.inputTarget
+    const maxLength = parseInt(input.getAttribute('maxlength')) || 4
     
-    // Ограничиваем длину до 4 символов
-    if (this.inputTarget.value.length > 4) {
-      this.inputTarget.value = this.inputTarget.value.slice(0, 4)
+    input.value = input.value.replace(/[^0-9]/g, '')
+    
+    if (input.value.length > maxLength) {
+      input.value = input.value.slice(0, maxLength)
     }
   }
 }
