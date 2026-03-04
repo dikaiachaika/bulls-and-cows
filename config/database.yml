@@ -2,21 +2,22 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  port: 5432
-  username: postgres
-  password: 898957
 
 development:
   <<: *default
   database: bulls_and_cows_development
+  username: postgres
+  password: 898957
+  host: localhost
+  port: 5432
 
 test:
   <<: *default
   database: bulls_and_cows_test
+  username: postgres
+  password: 898957
+  host: localhost
+  port: 5432
 
 production:
-  <<: *default
-  database: bulls_and_cows_production
-  username: bulls_and_cows
-  password: <%= ENV['BULLS_AND_COWS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
