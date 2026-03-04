@@ -262,6 +262,7 @@ tr:last-child td {
   }
   
   h2 {
+    text-align: center;
     font-size: 1.2rem;
   }
 
@@ -311,6 +312,14 @@ tr:last-child td {
   
   td:nth-child(3), td:nth-child(4) {
     text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
   }
 }
 
