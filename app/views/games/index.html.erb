@@ -1,12 +1,11 @@
-<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0;">
-  <img src="<%= asset_path('bull.png') %>" alt="Бык" style="width: 50px; height: 50px; object-fit: contain;">
-  <h1 style="margin: 0;">Быки и коровы</h1>
-  <img src="<%= asset_path('cow.png') %>" alt="Корова" style="width: 50px; height: 50px; object-fit: contain; margin-left: -10px;">
+<div class="game-header">
+  <img src="<%= asset_path('bull.png') %>" alt="Бык">
+  <h1 class="title-no-margin">Быки и коровы</h1>
+  <img src="<%= asset_path('cow.png') %>" alt="Корова" class="cow-icon">
 </div>
-
 <div class="game-info">
   <p><strong>Правила игры:</strong></p>
-  <ul style="padding-left: 20px; margin: 10px 0;">
+  <ul class="rules-list">
     <li>Компьютер загадывает число с неповторяющимися цифрами</li>
     <li>Вы вводите свой вариант</li>
     <li>Быки - цифра на своем месте</li>
@@ -15,25 +14,26 @@
     <li>Ведется учет времени игры</li>
   </ul>
 </div>
-
-<div class="form-group" style="text-align: center; margin-bottom: 20px;">
+<div class="form-group center-form">
   <label for="digit_length">Выберите длину числа:</label>
-  <%= form_with(url: games_path, method: :post, local: true, style: "display: inline-block;") do |form| %>
-    <div style="display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;">
-      <%= form.select :digit_length, 
-          options_for_select([['3 цифры', 3], ['4 цифры', 4], ['5 цифр', 5], ['6 цифр', 6]], 4), 
-          {}, 
-          class: "form-select", 
-          style: "padding: 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 16px;" %>
-      <%= form.submit "Новая игра", class: "btn btn-new", style: "min-width: 150px; background-color: #28a745;" %>
+  <%= form_with(url: games_path, method: :post, local: true, class: "inline-form") do |form| %>
+    <div class="form-row">
+      <%= form.select :digit_length,
+          options_for_select([
+            ['3 цифры', 3],
+            ['4 цифры', 4],
+            ['5 цифр', 5],
+            ['6 цифр', 6]
+          ], 4),
+          {},
+          class: "form-select" %>
+      <%= form.submit "Новая игра", class: "btn btn-new new-game-btn" %>
     </div>
   <% end %>
 </div>
-
 <% if @games.any? %>
   <h2>Последние игры</h2>
-  
-  <div style="overflow-x: auto;">
+  <div class="table-scroll">
     <table>
       <thead>
         <tr>
@@ -48,25 +48,37 @@
       <tbody>
         <% @games.each do |game| %>
           <tr>
-            <td><%= game.created_at.strftime("%d.%m %H:%M") %></td>
+            <td>
+              <%= game.created_at.strftime("%d.%m %H:%M") %>
+            </td>
             <td>
               <% if game.status == 'active' %>
-                <span style="color: #f7ce2b;">Активна</span>
+                <span class="status-active">Активна</span>
               <% elsif game.status == 'won' %>
-                <span style="color: #28a745;">Победа</span>
+                <span class="status-won">Победа</span>
               <% else %>
-                <span style="color: #dc3545;">Поражение</span>
+                <span class="status-lost">Поражение</span>
               <% end %>
             </td>
-            <td><%= game.digit_length %></td>
-            <td><%= game.attempts.count %>/10</td>
-            <td><%= game.formatted_time %></td>
             <td>
-              <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-                <%= link_to "Играть", game, style: "padding: 6px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; font-size: 0.9rem;" %>
-                <%= button_to "✕", game, method: :delete, 
+              <%= game.digit_length %>
+            </td>
+            <td>
+              <%= game.attempts.count %>/10
+            </td>
+            <td>
+              <%= game.formatted_time %>
+            </td>
+            <td>
+              <div class="actions">
+                <%= link_to "Играть",
+                    game,
+                    class: "play-btn" %>
+                <%= button_to "✕",
+                    game,
+                    method: :delete,
                     data: { confirm: "Удалить?" },
-                    style: "padding: 6px 12px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem;" %>
+                    class: "delete-btn" %>
               </div>
             </td>
           </tr>
@@ -74,12 +86,11 @@
       </tbody>
     </table>
   </div>
-  
-  <div style="text-align: center; margin-top: 20px; color: #666;">
+  <div class="games-count">
     <small>Всего игр: <%= @games.count %></small>
   </div>
 <% else %>
-  <p style="text-align: center; padding: 30px; background: #f8f9fa; border-radius: 8px; margin-top: 20px;">
+  <p class="empty-games">
     Нет игр. Начните новую игру!
   </p>
 <% end %>

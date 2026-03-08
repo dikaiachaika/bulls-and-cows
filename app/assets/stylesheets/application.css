@@ -1,457 +1,382 @@
-* {
-  box-sizing: border-box;
+/* Base reset */
+*{box-sizing:border-box}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+margin:0;
+padding:10px;
+background:#f5f5f5 url('/cow-print.jpg') center/cover fixed;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:flex-start;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: 0;
-  padding: 10px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+/* Layout */
+.container{
+background:#fff;
+padding:20px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+width:100%;
+max-width:600px;
+margin:0 auto;
 }
 
-.container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+/* Typography */
+h1{
+color:#333;
+font-size:1.8rem;
+margin:0 0 20px;
+text-align:center;
 }
 
-h1 {
-  color: #333;
-  font-size: 1.8rem;
-  margin-top: 0;
-  margin-bottom: 20px;
-  text-align: center;
+h2{
+font-size:1.4rem;
+text-align:center;
+margin-bottom:-5px;
 }
 
-h2 {
-  font-size: 1.4rem;
-  margin: 20px 0 15px;
+h3{
+font-size:1.2rem;
+margin:0 0 5px;
+color:#555;
+text-align:center;
 }
 
-h3 {
-  font-size: 1.2rem;
-  margin: 0 0 15px;
-  color: #555;
-  text-align: center; 
+/* Header */
+.game-header{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+margin:20px 0;
 }
 
-.game-info {
-  background-color: #e3f2fd;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  font-size: 1rem;
+.game-header img{
+width:50px;
+height:50px;
+object-fit:contain;
 }
 
-.game-info p {
-  margin: 8px 0;
+.cow-icon{margin-left:-10px}
+.title-no-margin{margin:0}
+
+/* Game info */
+.game-info{
+background:#fff4e2;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
 }
 
-.game-info-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100px;
-  width: 100%;
-  background-color: transparent;
-  padding: 0;
-  margin-bottom: 20px;
+.rules-list{
+padding-left:20px;
+margin:10px 0;
 }
 
-.game-info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 60px;
-  background-color: #e3f2fd;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 1rem;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  justify-items: center; 
+.game-info-center{
+display:flex;
+justify-content:center;
+margin-bottom:20px;
 }
 
-.game-info-grid .grid-item {
-  white-space: nowrap;
-  margin: 0;
+.game-info-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px 60px;
+background:#fff4e2;
+padding:15px;
+border-radius:10px;
+width:100%;
+justify-items:center;
 }
 
+.grid-item{white-space:nowrap}
 
-.attempt-form {
-  margin: 20px 0;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
+/* Status */
+.status-active{color:#f7ce2b}
+.status-won{color:#28a745}
+.status-lost{color:#dc3545}
+
+/* Forms */
+.attempt-form{
+margin:20px 0;
+padding:20px;
+background:#ebded3;
+border-radius:10px;
 }
 
-.form-group {
-  margin-bottom: 20px;
-  text-align: center; 
+.form-group{
+margin-bottom:20px;
+text-align:center;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #333;
+.form-group small {
+  display:block;
+  margin-top:8px;
+  color:#777;
+  font-size:0.85rem;
 }
 
-input[type="text"] {
-  width: 100%;
-  max-width: 150px;
-  padding: 12px;
-  font-size: 1.2rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  text-align: center;
-  -webkit-appearance: none;
-  appearance: none;
+.center-form{text-align:center;margin-bottom:20px}
+.inline-form{display:inline-block}
+
+.form-row{
+display:flex;
+gap:10px;
+align-items:center;
+justify-content:center;
+flex-wrap:wrap;
 }
 
-input[type="text"]:focus {
-  border-color: #007bff;
-  outline: none;
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+color:#333;
 }
 
-small {
-  display: block;
-  color: #666;
-  margin-top: 8px;
-  font-size: 0.9rem;
+input[type=text],
+.guess-input{
+width:100%;
+max-width:200px;
+padding:12px;
+font-size:1.1rem;
+border:2px solid #ddd;
+border-radius:8px;
+text-align:center;
 }
 
-.btn, 
-input[type="submit"] {
-  padding: 12px 24px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 500;
-  text-align: center;
-  transition: background-color 0.2s;
-  -webkit-appearance: none;
-  appearance: none;
-  width: auto;
-  min-width: 120px;
+input[type=text]:focus
+
+small{display:block;color:#666;margin-top:8px;font-size:.9rem}
+
+/* Select */
+.form-select{
+padding:10px;
+border-radius:5px;
+border:1px solid #ddd;
+font-size:16px;
+background:#fff;
+cursor:pointer;
 }
 
-.btn:hover,
-input[type="submit"]:hover {
-  background-color: #0056b3;
+.form-select:focus{
+outline:none;
+border-color:#c49a76;
+box-shadow:0 0 0 2px rgba(196,154,118,.25);
 }
 
-.btn-new {
-  background-color: #28a745;
+/* Buttons */
+
+.btn,
+input[type=submit]{
+padding:12px 24px;
+font-size:1rem;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:#fff;
+text-decoration:none;
+display:inline-block;
+min-width:120px;
+transition:background .2s, transform .08s;
 }
 
-.btn-new:hover {
-  background-color: #218838;
+.btn{
+background:#c49a76;
 }
 
-.btn-danger {
-  background-color: #dc3545;
+.btn:hover{
+background:#825238;
 }
 
-.btn-danger:hover {
-  background-color: #c82333;
+.btn-new{
+background:#8a5628;
+}
+
+.btn-new:hover{
+background:#70391b;
+}
+
+.btn-danger{
+background:#d6746b;
+}
+
+.btn-danger:hover{
+background:#bd3e3e;
 }
 
 button:disabled,
-input[type="submit"]:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
+input[type=submit]:disabled{
+background:#6c757d;
+cursor:not-allowed;
 }
 
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 30px;
-  justify-content: flex-start;
+/* Button groups */
+.button-group{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
 }
+
+.buttons-center{justify-content:center}
+
+.back-btn{
+padding:8px 24px;
+font-size:16px;
+min-width:100px;
+text-align:center;
+}
+
+.back-btn:hover{
+background:#825238;
+}
+
+/* Table */
+.table-scroll{overflow-x:auto;}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin:20px 0;
+font-size:.95rem;
+}
+
+th{
+background:#fff4e2;
+padding:12px 8px;
+text-align:center;
+}
+
+td{
+padding:12px 8px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+tr:last-child td{border-bottom:none}
+
+.guess-value{font-weight:600}
+
+.bulls{color:#28a745;font-weight:600}
+.cows{color:#ffc107;font-weight:600}
+
+/* Actions */
+.actions{display:flex;gap:5px;flex-wrap:wrap}
+
+.play-btn{
+padding:6px 12px;
+background:#c49a76;
+color:#fff;
+border-radius:5px;
+font-size:.9rem;
+}
+
+.play-btn:hover{
+background:#825238;
+}
+
+.delete-btn{
+padding:6px 12px;
+background:#d6746b;
+color:#fff;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:.9rem;
+}
+
+.delete-btn:hover{
+background:#bd3e3e;
+}
+
+/* Empty states */
+.empty-games{
+text-align:center;
+padding:30px;
+background:#ebded3;
+border-radius:8px;
+margin-top:20px;
+}
+
+.empty-attempts{
+text-align:center;
+padding:20px;
+background:#ebded3;
+border-radius:8px;
+}
+
+.games-count{text-align:center;color:#666}
+
+/* Flash */
+.flash{
+animation:slideIn .3s ease,fadeOut .5s ease 3s forwards;
+padding:15px;
+margin-bottom:20px;
+border-radius:4px;
+}
+
+.flash.notice{background:#d4edda;border:1px solid #c3e6cb;color:#155724}
+.flash.alert{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24}
+
+@keyframes slideIn{
+from{transform:translateY(-20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+@keyframes fadeOut{
+to{opacity:0;transform:translateY(-20px);display:none}
+}
+
+/* Mobile */
+@media(max-width:480px){
+
+body{
+padding:5px;
+background-size:600px;
+background-attachment:scroll;
+}
+
+.container{padding:15px;border-radius:10px}
+
+h1{font-size:1.5rem}
+
+h2{font-size:1.2rem}
+
+h3{font-size:1.1rem}
+
+.game-info-grid{
+gap:10px 40px;
+font-size:.95rem;
+}
+
+input[type=text]{max-width:100%}
+
+.btn,input[type=submit]{
+padding:10px 16px;
+font-size:.95rem;
+min-width:100px;
+}
+
+.button-group{flex-direction:column}
 
 .button-group .btn,
-.button-group input[type="submit"] {
-  flex: 0 1 auto;
-  min-width: 120px;
+.button-group input[type=submit]{width:100%}
+
+table{font-size:.8rem}
+
+th,td{padding:8px 4px;text-align:center}
+
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 0.95rem;
+@media(max-width:320px){
+
+.btn,input[type=submit]{
+min-width:80px;
+padding:8px 12px;
 }
 
-th {
-  background-color: #f2f2f2;
-  padding: 12px 8px;
-  text-align: left;
-  font-weight: 600;
+th,td{padding:6px 2px}
 }
-
-td {
-  padding: 12px 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-.bulls {
-  color: #28a745;
-  font-weight: 600;
-}
-
-.cows {
-  color: #ffc107;
-  font-weight: 600;
-}
-
-.game-status {
-  margin-top: 15px;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.won {
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  color: #155724;
-}
-
-.lost {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-}
-
-.flash {
-  animation: slideIn 0.3s ease, fadeOut 0.5s ease 3s forwards;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-}
-
-.form-select {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  background-color: white;
-  cursor: pointer;
-}
-
-.form-select:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-    display: none;
-  }
-}
-
-.flash.notice {
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  color: #155724;
-}
-
-.flash.alert {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: 5px;
-  }
-  
-  .container {
-    padding: 15px;
-    border-radius: 10px;
-  }
-  
-  h1 {
-    font-size: 1.5rem;
-  }
-  
-  h2 {
-    text-align: center;
-    font-size: 1.2rem;
-  }
-
-  h3 {
-    text-align: center;
-    font-size: 1.1rem;
-  }
-  
-  .game-info {
-    padding: 12px;
-    font-size: 0.9rem;
-  }
-
-  .game-info-grid {
-    grid-template-columns: 1fr 1fr; 
-    gap: 10px 60px; 
-    padding: 15px;
-    font-size: 1rem;
-    width: 100%;
-    max-width: 100%;
-    justify-items: center;
-    overflow-x: auto; 
-  }
-
-  .game-info-grid .grid-item {
-    white-space: nowrap; 
-  }
-  
-  .attempt-form {
-    padding: 15px;
-  }
-  
-  input[type="text"] {
-    max-width: 100%;
-    font-size: 1.1rem;
-    padding: 10px;
-  }
-  
-  .btn,
-  input[type="submit"] {
-    padding: 10px 16px;
-    font-size: 0.95rem;
-    min-width: 100px;
-  }
-  
-  .button-group {
-    flex-direction: column;
-  }
-  
-  .button-group .btn,
-  .button-group input[type="submit"] {
-    width: 100%;
-  }
-  
-  table {
-    font-size: 0.8rem;
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 8px 2px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-  }
-  
-  th:nth-child(3), td:nth-child(3),
-  th:nth-child(4), td:nth-child(4) {
-    text-align: center;
-  }
-  
-  th:last-child, td:last-child {
-    text-align: center;
-    white-space: nowrap;
-  }
-  
-  td:last-child a,
-  td:last-child button {
-    display: inline-block !important;
-    padding: 6px 8px !important;
-    font-size: 0.8rem !important;
-    min-width: 50px !important;
-    text-align: center !important;
-    margin: 0 2px !important;
-    vertical-align: middle !important;
-  }
-  
-  td:last-child form {
-    display: inline-block !important;
-    margin: 0 !important;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-    text-align: center; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-  }
-
-  .form-group:first-of-type label {
-    font-size: 13px;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .form-group:first-of-type select,
-  .form-group:first-of-type input[type="submit"] {
-    width: 100%;
-    padding: 6px 8px;
-    font-size: 13px;
-    margin: 3px 0;
-    box-sizing: border-box;
-    height: 34px;
-  }
-  
-  .form-group:first-of-type select {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: white;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  
-  .form-group:first-of-type input[type="submit"] {
-    min-width: auto;
-  }
-}
-
-@media (max-width: 320px) {
-  table {
-    font-size: 0.8rem;
-  }
-  
-  th, td {
-    padding: 6px 2px;
-  }
-  
-  .btn,
-  input[type="submit"] {
-    min-width: 80px;
-    padding: 8px 12px;
-  }
-}
-
