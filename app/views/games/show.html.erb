@@ -34,7 +34,8 @@
       html: { id: 'guess-form' }
     ) do |form| %>
       <div class="form-group">
-        <%= form.label :guess, "#{@game.digit_length} цифры (без повторений)" %>
+        <% phrase = digit_phrase(@game.digit_length) %>
+        <%= form.label :guess, "#{@game.digit_length} #{phrase[:word]} (без повторений)" %>
         <%= form.text_field :guess,
           maxlength: (@game.digit_length || 4),
           placeholder: "0" * (@game.digit_length || 4),
@@ -47,7 +48,7 @@
             game_target: "input",
             action: "input->game#validateInput"} %>
         <small>
-          Введите <%= @game.safe_digit_length %> разные цифры
+          Введите <%= @game.digit_length %> <%= phrase[:different] %> <%= phrase[:word] %>
           (например: <%= (0..9).to_a.sample(@game.safe_digit_length).join %>)
         </small>
       </div>

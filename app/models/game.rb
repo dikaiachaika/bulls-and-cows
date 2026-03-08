@@ -17,7 +17,6 @@ def check_guess(guess)
   bulls = 0
   cows = 0
   
-  # Логируем входящие данные
   puts "=" * 50
   puts "check_guess called:"
   puts "guess: #{guess} (#{guess.class})"

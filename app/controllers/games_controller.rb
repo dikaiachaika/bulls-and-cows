@@ -29,7 +29,8 @@ def attempt
   elsif !guess.match?(/\A\d{#{@game.digit_length}}\z/)
     flash[:alert] = "Пожалуйста, введите ровно #{@game.digit_length} цифр"
   elsif guess.chars.uniq.length != @game.digit_length
-    flash[:alert] = "Цифры не должны повторяться! Введите #{@game.digit_length} разные цифры"
+    phrase = digit_phrase(@game.digit_length)
+    flash[:alert] = "Цифры не должны повторяться! Введите #{@game.digit_length} #{phrase[:different]} #{phrase[:word]}"
   else
     @game.check_guess(guess)
     
