@@ -38,7 +38,7 @@
         <%= form.label :guess, "#{@game.digit_length} #{phrase[:word]} (без повторений)" %>
         <%= form.text_field :guess,
           maxlength: (@game.digit_length || 4),
-          placeholder: "0" * (@game.digit_length || 4),
+          placeholder: "_ " * (@game.digit_length || 4),
           class: "guess-input",
           autocomplete: 'off',
           inputmode: 'numeric',
