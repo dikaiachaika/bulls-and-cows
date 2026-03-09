@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
       
         if (uniqueDigits !== maxLength) {
-          showError(this, `Цифры не должны повторяться! Введите ${maxLength} разные цифры`);
+          showError(this, `Цифры не должны повторяться! Введите ${maxLength} ${getDigitPhrase(maxLength).different} ${getDigitPhrase(maxLength).word}`);
           if (submitBtn) submitBtn.disabled = true;
         } else {
           hideError(this);
@@ -47,6 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     observer.observe(guessInput, { attributes: true });
+  }
+
+  function getDigitPhrase(count) {
+    let word = (count === 3 || count === 4) ? "цифры" : "цифр";
+    let different = (count === 3 || count === 4) ? "разные" : "разных"; 
+    return { word, different };
   }
   
   function showError(input, message) {

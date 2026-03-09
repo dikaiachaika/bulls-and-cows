@@ -113,10 +113,10 @@ text-align:center;
 }
 
 .form-group small {
-  display:block;
-  margin-top:8px;
-  color:#777;
-  font-size:0.85rem;
+display:block;
+margin-top:8px;
+color:#777;
+font-size:0.85rem;
 }
 
 .center-form{text-align:center;margin-bottom:20px}
@@ -143,12 +143,19 @@ width:100%;
 max-width:200px;
 padding:12px;
 font-size:1.1rem;
-border:2px solid #ddd;
+border:2px solid #c49a76 !important;
 border-radius:8px;
 text-align:center;
+border-color: #c49a76 !important;
+box-shadow: 0 0 0 2px rgba(196, 154, 118, 0.25);
 }
 
-input[type=text]:focus
+input[type=text]:focus,
+.guess-input:focus {
+outline: none !important; 
+border-color: #c49a76 !important; 
+box-shadow: 0 0 0 3px rgba(196, 154, 118, 0.4); 
+}
 
 small{display:block;color:#666;margin-top:8px;font-size:.9rem}
 
@@ -156,7 +163,7 @@ small{display:block;color:#666;margin-top:8px;font-size:.9rem}
 .form-select{
 padding:10px;
 border-radius:5px;
-border:1px solid #ddd;
+border:1px solid #c49a76;
 font-size:16px;
 background:#fff;
 cursor:pointer;
@@ -164,7 +171,7 @@ cursor:pointer;
 
 .form-select:focus{
 outline:none;
-border-color:#c49a76;
+border-color:#825238;
 box-shadow:0 0 0 2px rgba(196,154,118,.25);
 }
 
@@ -254,6 +261,16 @@ padding:12px 8px;
 text-align:center;
 }
 
+th:first-child {
+border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+
+th:last-child {
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+}
+
 td{
 padding:12px 8px;
 border-bottom:1px solid #ddd;
@@ -337,13 +354,18 @@ to{opacity:0;transform:translateY(-20px);display:none}
 /* Mobile */
 @media(max-width:480px){
 
-body{
-padding:5px;
-background-size:600px;
-background-attachment:scroll;
+body {
+padding: 5px;
+background-size: 600px;
+background-attachment: scroll;
+align-items: center; 
 }
 
-.container{padding:15px;border-radius:10px}
+.container {
+padding: 15px;
+border-radius: 10px;
+margin: 0 auto; 
+}
 
 h1{font-size:1.5rem}
 
@@ -354,6 +376,11 @@ h3{font-size:1.1rem}
 .game-info-grid{
 gap:10px 40px;
 font-size:.95rem;
+}
+
+input[type=text],
+.guess-input {
+width: 200px !important;   
 }
 
 input[type=text]{max-width:100%}
