@@ -99,7 +99,7 @@
 <% end %>
 <div class="button-group buttons-center">
   <%= button_to "Новая игра",
-      games_path,
+      games_path(digit_length: @game.digit_length),
       method: :post,
       class: "btn btn-new" %>
   <%= link_to "К списку игр",
