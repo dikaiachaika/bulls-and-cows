@@ -111,6 +111,7 @@
         <tr>
           <th>Игрок</th>
           <th>Длина</th>
+          <th>Попыток</th>
           <th>Время</th>
         </tr>
       </thead>
@@ -125,7 +126,8 @@
               <%= game.user.name %>
             </td>
             <td><%= game.digit_length %></td>
-            <td><%= game.formatted_time %></td>
+            <td><%= game.attempts.count %>/10</td>
+            <td><%= game.formatted_time %></td>        
           </tr>
         <% end %>
       </tbody>

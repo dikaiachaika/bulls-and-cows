@@ -10,7 +10,7 @@
       <% else %>
         <span class="status-lost">Поражение</span>
       <% end %>
-    </div>
+    </div>    
     <div class="grid-item">
       <strong>Длина числа:</strong>
       <%= @game.digit_length %> цифры
@@ -25,6 +25,23 @@
     </div>
   </div>
 </div>
+
+<% if @game.status == 'won' || @game.status == 'lost' %>
+  <div class="game-result-box <%= @game.status == 'won' ? 'result-win' : 'result-lose' %>">
+    <h2>
+      <% if @game.status == 'won' %>
+        🎉 Вы выиграли!
+      <% else %>
+        😔 Вы проиграли
+      <% end %>
+    </h2>
+    <p class="secret-number-reveal">
+      <strong>Загаданное число:</strong> 
+      <span class="secret-number"><%= @game.secret_number %></span>
+    </p>
+  </div>
+<% end %>
+
 <% if @game.status == 'active' %>
   <div class="attempt-form">
     <h3>Введите ваш вариант:</h3>

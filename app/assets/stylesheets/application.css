@@ -132,6 +132,39 @@ justify-items:center;
 
 .grid-item{white-space:nowrap}
 
+/* Game result box */
+
+.game-result-box {
+padding: 12px 15px;
+border-radius: 10px;
+margin: 15px 0 15px;
+text-align: center;
+box-shadow: 0 2px 8px rgba(0,0,0,.08);
+animation: slideIn .3s ease;
+}
+
+.game-result-box h2 {
+margin: 0 0 8px;
+font-size: 1.3rem;
+font-weight: 500;
+}
+
+.result-win{background:#d4edda;border:1px solid #c3e6cb;color:#155724}
+.result-lose{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24}
+
+.secret-number-reveal{font-size:1rem;margin:8px 0 5px}
+.secret-number-reveal strong{font-weight:600;color:#555}
+.secret-number{
+font-weight:600;
+color:#333;
+background:#fff;
+padding:3px 10px;
+border-radius:5px;
+margin-left:5px;
+border:1px solid #c49a76;
+font-size:1.1rem;
+}
+
 /* Status */
 .status-active{color:#f7ce2b}
 .status-won{color:#28a745}
@@ -157,7 +190,7 @@ color:#777;
 font-size:0.85rem;
 }
 
-.center-form{text-align:center;margin-bottom:30px}
+.center-form{text-align:center;margin:30px}
 .inline-form{display:inline-block}
 
 .form-row{
@@ -195,7 +228,7 @@ border-color: #c49a76 !important;
 box-shadow: 0 0 0 3px rgba(196, 154, 118, 0.4); 
 }
 
-small{display:block;color:#666;margin-top:8px;font-size:.9rem}
+small{display:block;color:#666;margin:8px;font-size:.9rem}
 
 /* Select */
 .form-select{
