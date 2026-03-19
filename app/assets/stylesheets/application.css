@@ -146,7 +146,7 @@ border-radius:10px;
 }
 
 .form-group{
-margin-bottom:20px;
+margin:10px;
 text-align:center;
 }
 
@@ -157,7 +157,7 @@ color:#777;
 font-size:0.85rem;
 }
 
-.center-form{text-align:center;margin-bottom:20px}
+.center-form{text-align:center;margin-bottom:30px}
 .inline-form{display:inline-block}
 
 .form-row{
@@ -238,7 +238,7 @@ background:#825238;
 }
 
 .btn-new{
-background:#8a5628;
+background:#704b2b;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -281,6 +281,55 @@ text-align:center;
 
 .back-btn:hover{
 background:#825238;
+}
+
+/* Tabs for table */
+.tabs {
+display: flex;
+gap: 12px;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.tab-btn {
+padding: 12px 24px;
+border: none;
+background: #ebded3;
+border-radius: 10px;
+cursor: pointer;
+font-weight: 600;
+font-size: 1rem;
+color: #555;
+transition: all 0.2s ease;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+flex: 1 1 0; 
+min-width: 140px;
+}
+
+.tab-btn:hover {
+background: #c49a76;
+color: white;
+transform: translateY(-2px);
+box-shadow: 0 4px 8px rgba(196, 154, 118, 0.3);
+}
+
+.tab-btn.active {
+background: #825238;
+color: white;
+box-shadow: 0 4px 8px rgba(112, 75, 43, 0.4);
+position: relative;
+}
+
+.tab-btn.active::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 50%;
+transform: translateX(-50%);
+width: 30%;
+height: 3px;
+background: white;
+border-radius: 3px;
 }
 
 /* Table */
@@ -453,6 +502,13 @@ min-width:100px;
 table{font-size:.8rem}
 
 th,td{padding:8px 4px;text-align:center}
+
+.tab-btn {
+min-width: 120px;      
+padding: 12px 16px;    
+font-size: 0.9rem;      
+white-space: nowrap;
+}
 
 }
 

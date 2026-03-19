@@ -38,7 +38,16 @@
   <% end %>
 </div>
 <% if @games.any? %>
-  <h2>Последние игры</h2>
+  <div class="tabs">
+  <button class="tab-btn active" onclick="showSection('games', this)">
+    🎮 Мои игры
+  </button>
+  <button class="tab-btn" onclick="showSection('records', this)">
+    🏆 Рекорды игроков
+  </button>
+  </div>
+
+  <div id="games-section">
   <div class="table-scroll">
     <table>
       <thead>
@@ -92,6 +101,38 @@
       </tbody>
     </table>
   </div>
+  </div>
+
+  <div id="records-section" style="display:none;">
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Игрок</th>
+          <th>Длина</th>
+          <th>Время</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @records.each_with_index do |game, index| %>
+          <tr>
+            <td>
+              <% if index == 0 %>🥇
+              <% elsif index == 1 %>🥈
+              <% elsif index == 2 %>🥉
+              <% end %>
+              <%= game.user.name %>
+            </td>
+            <td><%= game.digit_length %></td>
+            <td><%= game.formatted_time %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
   <div class="games-count">
     <small>Всего игр: <%= @games.count %></small>
   </div>

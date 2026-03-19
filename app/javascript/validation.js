@@ -79,4 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
       existingError.remove();
     }
   }
+  
 });
+
+
+function showSection(section, element) {
+  document.getElementById('games-section').style.display = 'none';
+  document.getElementById('records-section').style.display = 'none';
+  document.getElementById(section + '-section').style.display = 'block';
+  const buttons = document.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  element.classList.add('active');
+}

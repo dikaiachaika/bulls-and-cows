@@ -4,6 +4,12 @@ class GamesController < ApplicationController
   
   def index
     @games = current_user.games.order(created_at: :desc).limit(20)
+
+    @records = Game
+      .where(status: 'won')
+      .includes(:user)
+      .sort_by(&:time_spent)
+      .first(10)
   end
   
   def create
