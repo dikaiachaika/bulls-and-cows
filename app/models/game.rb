@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  belongs_to :user
   has_many :attempts, dependent: :destroy
   
   validates :secret_number, presence: true, length: { is: :digit_length }

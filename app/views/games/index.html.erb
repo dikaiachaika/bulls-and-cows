@@ -1,3 +1,9 @@
+<div class="top-bar">
+  <% if current_user %>
+  Привет, <%= current_user.name %>! Надеюсь, вы ещё не хотите
+  <%= button_to "Выйти", logout_path, method: :delete, class: "logout-btn" %>
+  <% end %>
+</div>
 <div class="game-header">
   <img src="<%= asset_path('bull.png') %>" alt="Бык">
   <h1 class="title-no-margin">Быки и коровы</h1>
