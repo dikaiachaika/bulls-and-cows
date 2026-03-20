@@ -23,14 +23,7 @@ class GamesController < ApplicationController
   
   def attempt
     guess = params[:guess].to_s.strip
-    
-    puts "=" * 50
-    puts "ATTEMPT CONTROLLER:"
-    puts "Game ID: #{@game.id}"
-    puts "Guess from params: #{guess}"
-    puts "Game digit_length: #{@game.digit_length}"
-    puts "Game secret_number: #{@game.secret_number}"
-    
+
     if guess.blank?
       flash[:alert] = "Пожалуйста, введите число"
     elsif !guess.match?(/\A\d{#{@game.digit_length}}\z/)

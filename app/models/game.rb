@@ -14,46 +14,26 @@ class Game < ApplicationRecord
     digit_length || 4
   end
   
-def check_guess(guess)
-  bulls = 0
-  cows = 0
-  
-  puts "=" * 50
-  puts "check_guess called:"
-  puts "guess: #{guess} (#{guess.class})"
-  puts "secret_number: #{secret_number} (#{secret_number.class})"
-  puts "digit_length: #{digit_length}"
-  puts "secret_number length: #{secret_number.length}"
-  
-  guess.to_s.chars.each_with_index do |digit, index|
-    puts "digit #{index}: #{digit} comparing with secret_number[#{index}]: #{secret_number[index]}"
+  def check_guess(guess)
+    bulls = 0
+    cows = 0
     
-    if digit == secret_number[index]
-      bulls += 1
-      puts "  -> BULL! bulls now: #{bulls}"
-    elsif secret_number.include?(digit)
-      cows += 1
-      puts "  -> COW! cows now: #{cows}"
-    else
-      puts "  -> nothing"
+    guess.to_s.chars.each_with_index do |digit, index|
+      if digit == secret_number[index]
+        bulls += 1
+      elsif secret_number.include?(digit)
+        cows += 1
+      end
     end
+    
+    attempt = attempts.create(guess: guess, bulls: bulls, cows: cows)
+    
+    if bulls == digit_length
+      update(status: 'won', completed_at: Time.current)
+    end
+    
+    bulls
   end
-  
-  attempt = attempts.create(guess: guess, bulls: bulls, cows: cows)
-  puts "Attempt created: #{attempt.valid? ? 'valid' : 'invalid'} #{attempt.errors.full_messages}"
-  puts "Bulls: #{bulls}, digit_length: #{digit_length}, bulls == digit_length? #{bulls == digit_length}"
-  
-  if bulls == digit_length
-    puts "VICTORY! Updating status to won"
-    update(status: 'won', completed_at: Time.current)
-  else
-    puts "No victory yet"
-  end
-  
-  puts "=" * 50
-  
-  bulls
-end
   
   def max_attempts_reached?
     attempts.count >= 10

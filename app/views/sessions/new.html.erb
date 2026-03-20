@@ -18,6 +18,7 @@
   <% end %>
 </div>
 
-<p class="games-count">
-  Нет аккаунта? Тогда советую <%= link_to "Зарегистрироваться", signup_path, class: "play-btn" %>
-</p>
+<div class="auth-footer">
+  <span class="auth-text">Нет аккаунта? Тогда советую</span>
+  <%= link_to "Зарегистрироваться", signup_path, class: "auth-button" %>
+</div>
