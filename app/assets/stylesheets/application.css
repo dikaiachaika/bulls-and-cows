@@ -64,6 +64,43 @@ object-fit:contain;
 .cow-icon{margin-left:-10px}
 .title-no-margin{margin:0}
 
+/* Registration */
+
+.auth-footer {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 15px;
+margin: 10px 0 10px;
+padding: 15px 10px;
+background: #ebded3;
+border-radius: 10px;
+flex-wrap: wrap;
+}
+
+.auth-text {
+font-size: 1rem;
+color: #333;
+line-height: 1.4;
+}
+
+.auth-button {
+display: inline-block;
+background: #c49a76;
+color: white;
+padding: 10px 24px;
+border-radius: 8px;
+text-decoration: none;
+font-size: 1rem;
+font-weight: 500;
+transition: background 0.2s, transform 0.08s;
+white-space: nowrap;
+}
+
+.auth-button:hover {
+background: #825238;
+}
+
 /* Top bar */
 .top-bar {
 display: flex;
@@ -81,62 +118,41 @@ flex-wrap: nowrap;
 gap: 10px;
 }
 
-/* Registration */
+/* Setup/sogout buttons */
 
-.auth-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin: 10px 0 10px;
-  padding: 15px 10px;
-  background: #ebded3;
-  border-radius: 10px;
-  flex-wrap: wrap;
-}
-
-.auth-text {
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.4;
-}
-
-.auth-button {
-  display: inline-block;
-  background: #c49a76;
-  color: white;
-  padding: 10px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background 0.2s, transform 0.08s;
-  white-space: nowrap;
-}
-
-.auth-button:hover {
-  background: #825238;
-}
-
-/* Logout button */
+.settings-btn,
 .logout-btn {
-background: #d6746b;
+all: unset; 
+display: inline-block;
 color: white;
-border: none;
 border-radius: 8px;
 padding: 8px 16px;
 font-size: 0.9rem;
 cursor: pointer;
-transition: background 0.2s, transform 0.08s;
-text-decoration: none;
-display: inline-block;
-min-width: 80px;
 text-align: center;
-flex-shrink: 0;
+min-width: 80px;
+}
+
+.settings-btn {
+margin-left: auto;
+background: #c49a76;
+}
+
+.settings-btn:hover {
+background: #825238;
+}
+
+.logout-btn {
+background: #d6746b;
 }
 
 .logout-btn:hover {
-  background: #bd3e3e;
+background: #bd3e3e;
+}
+
+.game-info.settings-rules {
+background:#ebded3;
+margin: 0;
 }
 
 /* Game info */
@@ -229,7 +245,7 @@ color:#777;
 font-size:0.85rem;
 }
 
-.center-form{text-align:center;margin:30px}
+.center-form{text-align:center;margin: 20px 0 10px;}
 .inline-form{display:inline-block}
 
 .form-row{
@@ -357,27 +373,27 @@ background:#825238;
 
 /* Tabs for table */
 .tabs {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+display: flex;
+gap: 12px;
+justify-content: center;
+flex-wrap: wrap;
 }
 
 .tab-btn {
-  padding: 12px 24px;
-  border: none;
-  background: #ebded3;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #555;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  flex: 1 1 0; /* Возвращаем растягивание */
-  min-width: 140px;
-  white-space: nowrap;
-  text-align: center;
+padding: 12px 24px;
+border: none;
+background: #ebded3;
+border-radius: 10px;
+cursor: pointer;
+font-weight: 600;
+font-size: 1rem;
+color: #555;
+transition: all 0.2s ease;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+flex: 1 1 0; 
+min-width: 140px;
+white-space: nowrap;
+text-align: center;
 }
 
 .tab-btn:hover {
@@ -539,7 +555,8 @@ h3{font-size:1.1rem}
 padding: 8px 10px;
 font-size: 15px;
 }
-  
+
+.settings-btn,
 .logout-btn {
 padding: 6px 12px;
 min-width: auto;
@@ -578,11 +595,11 @@ table{font-size:.8rem}
 
 th,td{padding:8px 4px;text-align:center}
 
-  .tab-btn {
-    min-width: 120px;
-    padding: 10px 16px;
-    font-size: 0.95rem;
-  }
+.tab-btn {
+min-width: 120px;
+padding: 10px 16px;
+font-size: 0.95rem;
+}
 
 }
 
@@ -601,10 +618,10 @@ padding:8px 12px;
 
 th,td{padding:6px 2px}
 
-  .tab-btn {
-    font-size: 0.8rem;
-    white-space: normal; 
-    padding: 10px 12px;
-  }
+.tab-btn {
+font-size: 0.8rem;
+white-space: normal; 
+padding: 10px 12px;
+}
 
 }

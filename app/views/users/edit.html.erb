@@ -1,0 +1,36 @@
+<h1>Настройки аккаунта</h1>
+
+<div class="game-info">
+  <%= form_with(model: @user, local: true) do |form| %>
+
+    <div class="form-group">
+      <%= form.label :name, "Редактировать имя" %>
+      <%= form.text_field :name, maxlength: 20, class: "guess-input", placeholder: "Введите имя" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password, "Редактировать пароль" %>
+      <%= form.password_field :password, maxlength: 20, class: "guess-input", placeholder: "Введите пароль" %>
+      <small>Пароль не может быть меньше 6 символов</small>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation, "Подтвердить пароль" %>
+      <%= form.password_field :password_confirmation, maxlength: 20, class: "guess-input", placeholder: "Повторите пароль" %>
+    </div>
+
+    <div class="center-form">
+    <%= form.submit "Сохранить", class: "btn" %>
+    </div>
+
+  <% end %>
+  </div>
+
+<div class="game-info settings-rules">
+  <p><strong>Как обновить данные:</strong></p>
+  <ul class="rules-list">
+      <li>Вы можете изменить <strong>только имя</strong>: укажите новое имя, введите и подтвердите старый пароль.</li>
+      <li>Вы можете изменить <strong>только пароль</strong>: укажите новый пароль и подтвердите его.</li>
+      <li>Вы можете изменить <strong>имя и пароль одновременно</strong>: укажите новое имя, новый пароль и подтвердите его.</li>
+  </ul>
+</div>

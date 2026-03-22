@@ -1,6 +1,7 @@
 <div class="top-bar">
   <% if current_user %>
-  Привет, <%= current_user.name %>! Надеюсь, Вы ещё не хотите
+  Привет, <%= current_user.name %>! 
+  <%= link_to "⚙ Настройки", edit_user_path(current_user), class: "settings-btn" %>
   <%= button_to "Выйти", logout_path, method: :delete, class: "logout-btn" %>
   <% end %>
 </div>
