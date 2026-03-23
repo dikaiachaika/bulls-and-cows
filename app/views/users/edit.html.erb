@@ -10,8 +10,7 @@
 
     <div class="form-group">
       <%= form.label :password, "Редактировать пароль" %>
-      <%= form.password_field :password, maxlength: 20, class: "guess-input", placeholder: "Введите пароль" %>
-      <small>Пароль не может быть меньше 6 символов</small>
+      <%= form.password_field :password, maxlength: 20, class: "guess-input", id: "password-field", placeholder: "Введите пароль" %>
     </div>
 
     <div class="form-group">
@@ -20,7 +19,7 @@
     </div>
 
     <div class="center-form">
-    <%= form.submit "Сохранить", class: "btn" %>
+      <%= form.submit "Сохранить", class: "btn" %>
     </div>
 
   <% end %>

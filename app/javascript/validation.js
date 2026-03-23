@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-
     const observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
         if (mutation.attributeName === 'maxlength') {
@@ -48,6 +47,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     observer.observe(guessInput, { attributes: true });
   }
+
+  const passwordInput = document.getElementById('password-field');
+  if (passwordInput) {
+    passwordInput.addEventListener('input', function () {
+      const value = this.value;
+
+      if (value.length < 6) {
+        showError(this, 'Пароль должен быть минимум 6 символов');
+      } else {
+        hideError(this);
+      }
+    });
+  }
+
 
   function getDigitPhrase(count) {
     let word = (count === 3 || count === 4) ? "цифры" : "цифр";
@@ -82,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
 });
 
-
 function showSection(section, element) {
   document.getElementById('games-section').style.display = 'none';
   document.getElementById('records-section').style.display = 'none';
@@ -91,3 +103,4 @@ function showSection(section, element) {
   buttons.forEach(btn => btn.classList.remove('active'));
   element.classList.add('active');
 }
+

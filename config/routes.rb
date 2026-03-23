@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "password_resets/new"
+  get "password_resets/create"
+  get "password_resets/edit"
+  get "password_resets/update"
   resources :games do
     member do
       post 'attempt'
@@ -6,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:edit, :update]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"

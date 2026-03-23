@@ -1,0 +1,14 @@
+<h1>Восстановление пароля</h1>
+
+<div class="game-info">
+  <%= form_with url: password_resets_path, local: true do %>
+    <div class="form-group">
+    <%= label_tag :name, "Введите имя" %>
+    <%= text_field_tag :name %>
+    </div>
+
+    <div class="center-form">
+      <%= submit_tag "Далее", class: "btn" %>
+    </div>
+  <% end %>
+</div>

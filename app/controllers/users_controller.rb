@@ -8,10 +8,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
+    if user_params.values.any?(&:blank?)
+      flash.now[:alert] = "Пожалуйста, заполните все поля"
+      render :new
+    elsif @user.save
       session[:user_id] = @user.id
       redirect_to games_path
     else
+      flash.now[:alert] = "Ошибка при регистрации"
       render :new
     end
   end
@@ -34,6 +38,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
+  params.require(:user).permit(:name, :password, :password_confirmation, :security_question, :security_answer)
   end
+  
 end
