@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to games_path, notice: "Данные обновлены"
     else
+      flash.now[:alert] = "Пожалуйста, заполните все поля"
       render :edit, status: :unprocessable_entity
     end
   end

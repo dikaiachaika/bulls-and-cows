@@ -92,7 +92,7 @@ padding: 10px 24px;
 border-radius: 8px;
 text-decoration: none;
 font-size: 1rem;
-font-weight: 500;
+font-weight: 400;
 transition: background 0.2s, transform 0.08s;
 white-space: nowrap;
 }
@@ -338,7 +338,7 @@ background:#825238;
 .btn-new{
 background:#825238;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-font-weight: bold;
+font-weight: 400;
 }
 
 .btn-new:hover{
@@ -346,6 +346,10 @@ background-image:url('/cow-btn.jpg');
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
+}
+
+.new-game-btn{
+padding: 12px 24px !important;
 }
 
 .btn-danger{
@@ -362,7 +366,6 @@ background:#6c757d;
 cursor:not-allowed;
 }
 
-/* Button groups */
 .button-group{
 display:flex;
 flex-wrap:wrap;
@@ -374,6 +377,7 @@ gap:10px;
 .back-btn{
 padding:8px 24px;
 font-size:16px;
+font-weight: 400;
 min-width:100px;
 text-align:center;
 }
@@ -653,4 +657,11 @@ font-size: 0.8rem;
 white-space: nowrap;
 }
 
+.game-info-grid {
+font-size: 14px; 
 }
+
+}
+
+
+
