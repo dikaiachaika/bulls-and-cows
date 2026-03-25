@@ -109,7 +109,6 @@ align-items: center;
 padding: 10px 15px;
 background: #fff4e2;
 border-radius: 10px;
-/* border: 1px solid #e8d5c0;  */
 margin-bottom: 20px;
 font-size: 16px;
 color: #555;
@@ -118,8 +117,13 @@ flex-wrap: nowrap;
 gap: 10px;
 }
 
-/* Settings/logout buttons */
+.top-bar form.button_to {
+display: inline-block;
+margin: 0;
+padding: 0;
+}
 
+/* Settings/logout buttons */
 .settings-btn,
 .logout-btn {
 all: unset; 
@@ -134,7 +138,6 @@ min-width: 80px;
 }
 
 .settings-btn {
-margin-left: auto;
 background: #c49a76;
 }
 
@@ -373,18 +376,6 @@ gap:10px;
 }
 
 .buttons-center{justify-content:center}
-
-.back-btn{
-padding:8px 24px;
-font-size:16px;
-font-weight: 400;
-min-width:100px;
-text-align:center;
-}
-
-.back-btn:hover{
-background:#825238;
-}
 
 /* Tabs for table */
 .tabs {

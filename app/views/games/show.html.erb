@@ -119,9 +119,10 @@
       games_path(digit_length: @game.digit_length),
       method: :post,
       class: "btn btn-new" %>
-  <%= link_to "К списку игр",
+  <%= button_to "К списку игр",
       games_path,
-      class: "btn back-btn" %>
+      method: :get,
+      class: "btn" %>
   <%= button_to "Удалить игру",
       @game,
       method: :delete,

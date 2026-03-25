@@ -1,8 +1,12 @@
 <div class="top-bar">
   <% if current_user %>
-  Привет, <%= current_user.name %>! 
-  <%= link_to "⚙ Настройки", edit_user_path(current_user), class: "settings-btn" %>
-  <%= button_to "Выйти", logout_path, method: :delete, class: "logout-btn" %>
+    <div class="user-greeting">
+      Привет, <%= current_user.name %>!
+    </div>
+    <div class="set-log-btn-group">
+      <%= button_to "⚙ Настройки", edit_user_path(current_user), method: :get, class: "settings-btn" %>
+      <%= button_to "Выйти", logout_path, method: :delete, class: "logout-btn" %>
+    </div>
   <% end %>
 </div>
 <div class="game-header">
