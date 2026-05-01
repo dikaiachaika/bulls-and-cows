@@ -47,6 +47,9 @@
   <button class="tab-btn active" onclick="showSection('games', this)">
     🎮 Мои игры
   </button>
+  <button class="tab-btn" onclick="showSection('stats', this)">
+    📊 Статистика
+  </button>
   <button class="tab-btn" onclick="showSection('records', this)">
     🏆 Рекорды игроков
   </button>
@@ -108,8 +111,81 @@
   </div>
   </div>
 
-  <div id="records-section" style="display:none;">
+  <div id="stats-section" style="display:none;">
+  <% if @stats.present? && @stats[:total_games] > 0 %>
+    <div class="stats-container">
+      <div class="stats-overview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value"><%= @stats[:total_games] %></div>
+            <div class="stat-label">Всего игр</div>
+          </div>
+          <div class="stat-card won">
+            <div class="stat-value"><%= @stats[:games_won] %></div>
+            <div class="stat-label">Побед</div>
+          </div>
+          <div class="stat-card lost">
+            <div class="stat-value"><%= @stats[:games_lost] %></div>
+            <div class="stat-label">Поражений</div>
+          </div>
+          <div class="stat-card active">
+            <div class="stat-value"><%= @stats[:games_active] %></div>
+            <div class="stat-label">Активных</div>
+          </div>
+        </div>
+      </div>
 
+      <div class="stats-details">
+        <div class="detail-row">
+          <span class="detail-label">Процент побед:</span>
+          <span class="detail-value"><%= @stats[:win_rate] %>%</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Всего попыток:</span>
+          <span class="detail-value"><%= @stats[:total_attempts] %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Среднее попыток за игру:</span>
+          <span class="detail-value"><%= @stats[:avg_attempts_per_game] %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Лучшее время:</span>
+          <span class="detail-value"><%= @stats[:best_time] %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Лучший результат (попыток):</span>
+          <span class="detail-value"><%= @stats[:best_attempts] %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Общее время в игре:</span>
+          <span class="detail-value"><%= format_seconds(@stats[:total_time_spent]) %></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Последняя игра:</span>
+          <span class="detail-value"><%= @stats[:last_game_date] %></span>
+        </div>
+      </div>
+
+      <% if @stats[:by_digit_length].present? %>
+        <div class="stats-by-length">
+          <h4>Количество игр по длине числа</h4>
+          <div class="length-grid">
+            <% @stats[:by_digit_length].each do |length, count| %>
+              <div class="length-card">
+                <div class="length-value"><%= length %> цифры:</div>
+                <div class="length-count"><%= count %></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="empty-games">Нет данных для статистики. Сыграйте хотя бы одну игру!</p>
+  <% end %>
+  </div>
+
+  <div id="records-section" style="display:none;">
   <div class="table-scroll">
     <table>
       <thead>
