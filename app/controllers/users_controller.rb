@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to games_path
     else
-      flash.now[:alert] = "Ошибка при регистрации"
+      flash.now[:alert] = "Никнейм уже занят"
       render :new
     end
   end
@@ -24,10 +24,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    if user_params.values.any?(&:blank?)
+      flash.now[:alert] = "Пожалуйста, заполните все поля"
+      render :edit, status: :unprocessable_entity
+    elsif user_params[:password] != user_params[:password_confirmation]
+      flash.now[:alert] = "Пароли не совпадают"
+      render :edit, status: :unprocessable_entity
+    elsif @user.update(user_params.except(:password_confirmation))
       redirect_to games_path, notice: "Данные обновлены"
     else
-      flash.now[:alert] = "Пожалуйста, заполните все поля"
+      flash.now[:alert] = "Никнейм уже занят"
       render :edit, status: :unprocessable_entity
     end
   end
@@ -39,7 +45,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  params.require(:user).permit(:name, :password, :password_confirmation, :security_question, :security_answer)
+    params.require(:user).permit(:name, :password, :password_confirmation)
   end
-  
 end
