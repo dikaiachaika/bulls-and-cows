@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:notice] = "Вы успешно вошли"  # ← Добавьте эту строку
+      flash[:notice] = "Вы успешно вошли"  
       redirect_to games_path
     else
       flash[:alert] = "Неверное имя или пароль"
